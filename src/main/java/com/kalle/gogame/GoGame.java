@@ -180,12 +180,13 @@ public class GoGame extends Application {
                                 return;
                             }
 
-                            // TODO 打劫的情况
+                            // 打劫的情况
                             if (!doLog.isEmpty()) {
                                 GoRecord peek = doLog.peek();
                                 // 上一手刚好只吃掉一个子，而且是自己，则打劫
                                 if (peek.getKillGoItems().size() == 1 && peek.getKillGoItems().contains(circle)) {
                                     Toast.toast("打劫");
+                                    rollbackStep(circle);
                                     return;
                                 }
                             }
