@@ -16,8 +16,8 @@ import java.util.TimerTask;
 /**
  * 消息弹窗
  *
- * @author xiexincong
- * @since 2022/11/18
+ * @author kalle
+ * @since 2022-11-18
  */
 public class Toast {
 

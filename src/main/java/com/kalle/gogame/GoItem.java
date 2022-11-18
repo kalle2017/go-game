@@ -4,35 +4,51 @@ import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
- * @author xiexincong
- * @since 2022/11/17
+ * 围棋棋子
+ *
+ * @author kalle
+ * @since 2022-11-18
  */
 public class GoItem extends Circle {
 
-    // 鼠标悬浮在棋子上显示的颜色，透明度0.3
+    /**
+     * 允许设置的颜色值: BLACK | WHITE | null
+     */
+    private static final List<Color> ALLOW_COLORS = Arrays.asList(Color.BLACK, Color.WHITE, null);
 
+    /**
+     * 鼠标悬浮在棋子上显示的颜色状态机，透明度0.3
+     */
     private static final Color[] HOVER_COLOR_STATUS_MACHINE = {
             Color.rgb(255, 255, 255, 0.3),
             Color.rgb(0, 0, 0, 0.3),
     };
-    
-    private final int x;
-    private final int y;
 
+    /**
+     * 横、纵坐标
+     */
+    private final int x, y;
+
+    /**
+     * 棋子颜色，用于显示时的判断(白/黑)，隐藏时为null
+     */
     private Color color;
 
-    private GoItem up;
-    private GoItem down;
-    private GoItem left;
-    private GoItem right;
+    /**
+     * 当前棋子的上下左右指针
+     */
+    private GoItem up, down, left, right;
 
     public GoItem(int x, int y, GoGame goGame) {
         this.x = x;
         this.y = y;
         // 设置事件
         this.setCursor(Cursor.HAND);
-        
+
         // 鼠标移入，移出事件
         this.setOnMouseMoved(e -> {
             if (this.getColor() == null) {
@@ -61,6 +77,10 @@ public class GoItem extends Circle {
     }
 
     public void setColor(Color color) {
+        // 只允许设置3个值，BLACK|WHITE|null
+        if (!ALLOW_COLORS.contains(color)) {
+            throw new IllegalArgumentException("颜色值只允许为: BLACK | WHITE | null");
+        }
         this.color = color;
         // 设置棋子颜色
         if (color == null) {
