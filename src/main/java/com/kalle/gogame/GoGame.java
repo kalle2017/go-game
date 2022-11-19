@@ -353,8 +353,13 @@ public class GoGame extends Application {
         // 推入回退记录中
         undoLog.push(pop);
 
-        // 更新指针位置
-        updatePointer(doLog.peek().getKiller());
+        if (doLog.isEmpty()) {
+            // 隐藏指针
+            hidePointer();
+        } else {
+            // 更新指针位置
+            updatePointer(doLog.peek().getKiller());
+        }
     }
 
     /**
