@@ -80,7 +80,7 @@ public class WavPlayer {
      */
     private static AudioClip loadAudio(String audioPath) {
         ClassLoader classLoader = WavPlayer.class.getClassLoader();
-        URL playUrl = classLoader.getResource("wav/play.wav");
+        URL playUrl = classLoader.getResource(audioPath);
         return Applet.newAudioClip(playUrl);
     }
 }
